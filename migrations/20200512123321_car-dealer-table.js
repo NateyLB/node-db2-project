@@ -4,11 +4,11 @@ exports.up = function (knex) {
         // primary key, called id, autoincrements, not null
         tbl.increments();
         tbl.string("VIN", 17).notNullable().unique();
-        tbl.string("Make").notNullable();
-        tbl.string("Model").notNullable();
-        tbl.integer("Mileage").notNullable();
-        tbl.string("Transmission Type");
-        tbl.string("Title Status");
+        tbl.string("make").notNullable();
+        tbl.string("model").notNullable();
+        tbl.integer("mileage").notNullable();
+        tbl.string("transmission type");
+        tbl.string("title status");
         tbl.timestamps(true, true); // created_at and updated_at
     })
 };
