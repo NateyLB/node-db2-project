@@ -29,4 +29,37 @@ server.post("/", (req, res)=>{
       });
 })
 
+server.put("/:id",(req, res)=>{
+    db("Cars")
+    .where({id : req.params.id})
+    .update(req.body)
+    .then(count =>{
+        res.status(200).json({data: count, message: "Succesfully updated"})
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: error.messsage });
+      });
+})
+
+server.delete("/:id", (req, res)=>{
+    db("Cars")
+    .where({id: req.params.id})
+    .del()
+    .then(count=>{
+        if(count>0){
+            db("Cars")
+            .then(cars=>{
+                res.status(200).json(cars)
+            })
+        }else{
+            res.status(500).json({message: "Could not delete the specified car"})
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: error.messsage });
+      });
+})
+
 module.exports = server;
